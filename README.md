@@ -13,7 +13,7 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 - [x] : [3. DockerHub에 등록]
 - [x] : [4. Docker 실행]
 - [x] : [5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set]
-- [ ] : [6. GPU 연결 확인 및 GPU 사용량 확인]
+- [x] : [6. GPU 연결 확인 및 GPU 사용량 확인]
 - [ ] : [다른 환경에서 Docker Test]
 
 <br>
