@@ -13,6 +13,7 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 - [x] : [3. DockerHub에 등록]
 - [x] : [4. Docker 실행]
 - [x] : [5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set]
+- [ ] : [6. GPU 연결 확인 및 GPU 사용량 확인]
 - [ ] : [다른 환경에서 Docker Test]
 
 <br>
@@ -230,7 +231,31 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 
 <br>
 
-# 6. 다른 환경에서 Docker Test
+# 6. GPU 연결 확인 및 GPU 사용량 확인
+
+- GPU 연결 확인 방법은 다음과 같다. vscode에서 바로 실행해볼 수 있다.
+  ```bash
+  nvidia-smi
+  ```
+  ![image](https://user-images.githubusercontent.com/66783849/226227983-b6677afd-581d-4f8f-bb0b-1bb901f2d86d.png)
+- 보다 자세한 정보는 다음과 같이 확인할 수 있다.
+  ```bash
+  nvidia-smi -q
+  ```
+  ![image](https://user-images.githubusercontent.com/66783849/226228045-7a9c7d9d-6d46-42f9-88f6-c0bfeebaf0cb.png)
+- GPU 사용량을 실시간으로 확인할려면, 다음과 같이 할 수 있다.
+  ```bash
+  watch -d -n 1 nvidia-smi
+  ```
+  ![image](https://user-images.githubusercontent.com/66783849/226228163-b22480e7-ae55-4d27-9019-eb3cee13e815.png)
+- 이를 통해 프로그램을 실행 한 후, gpu 사용량을 확인해볼 수 있다.
+  ![image](https://user-images.githubusercontent.com/66783849/226228268-c10f8268-5781-4281-8f10-b3235830a12c.png)  
+  ![image](https://user-images.githubusercontent.com/66783849/226228382-9b7ef668-5941-48f7-9448-d907933ce304.png)
+
+  
+<br>
+
+# 7. 다른 환경에서 Docker Test
 
 - 다른 Window 및 Linux 환경에서 Test를 진행해 보았다.
   
