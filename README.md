@@ -70,3 +70,15 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
   ```
 
 <br>
+
+
+# 2. Dockerfile 빌드
+
+- 다음과 같이 dockerfile을 빌드한다.  
+  ```bash
+  docker build -t cuda-vscode .
+  ```
+  ![image](https://user-images.githubusercontent.com/66783849/226215743-067f872f-4ab6-4104-b9c6-b689d5359206.png)
+  
+<br>
+  
