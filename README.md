@@ -12,7 +12,7 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 - [ ] : [2. Dockerfile 빌드]
 - [ ] : [3. DockerHub에 등록]
 - [ ] : [4. Docker 실행]
-- [ ] : [Docker Test]
+- [ ] : [5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set]
 - [ ] : [다른 환경에서 Docker Test]
 
 <br>
@@ -112,6 +112,17 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
   ```bash
   docker start cuda-vscode
   ```
+- 만일 vscode의 비밀번호를 모르겠으면, 실행중인 contatiner에 접속하여 다음과 같은 명령어를 입력하여 비밀번호를 확인한다.
+  ```bash
+  # docker ps 명령을 사용하여 실행 중인 컨테이너 ID를 확인
+  docker ps
+  
+  # 컨테이너 내부의 bash 셸을 실행
+  docker exec -it [container-id] bash
+  
+  # 비밀번호 확인
+  cat ~/.config/code-server/config.yaml | grep password
+  ```
 - exe 형식으로 구성하려면, 다음과 같이 bat를 구성한다.  
   ![image](https://user-images.githubusercontent.com/66783849/226222086-cdf2ceab-2cd7-4bd0-bfdd-fc0a33e80f17.png)  
   ```bach
@@ -149,3 +160,70 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
   ![image](https://user-images.githubusercontent.com/66783849/226219809-a5ef9fa4-86e0-479f-a00f-95a5747dd37c.png)  
   ![image](https://user-images.githubusercontent.com/66783849/226219831-52d1109b-ab7a-4ee7-898d-3186b05c0286.png)
 
+<br>
+
+#  5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set
+
+- 다음과 같이 Mandelbrot Set 이미지를 출력하는 예제를 구성한다.
+  ```cuda
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <stdint.h>
+  #include <cuda.h>
+  
+  #define WIDTH 800
+  #define HEIGHT 800
+  #define MAX_ITERATIONS 255
+  
+  __global__ void mandelbrotKernel(uint8_t *img, double xmin, double ymin, double xmax, double ymax, double dx, double dy) {
+      int i = threadIdx.x + blockIdx.x * blockDim.x;
+      int j = threadIdx.y + blockIdx.y * blockDim.y;
+      double x = xmin + i * dx;
+      double y = ymin + j * dy;
+      double zr = x;
+      double zi = y;
+      int k;
+      for (k = 0; k < MAX_ITERATIONS; k++) {
+          if (zr * zr + zi * zi > 4.0) break;
+          double tmp = zr * zr - zi * zi + x;
+          zi = 2.0 * zr * zi + y;
+          zr = tmp;
+      }
+      img[i + j * WIDTH] = k;
+  }
+  
+  int main(void) {
+      uint8_t *img = (uint8_t*)malloc(WIDTH * HEIGHT * sizeof(uint8_t));
+      uint8_t *dev_img;
+      double xmin = -2.0;
+      double ymin = -2.0;
+      double xmax = 2.0;
+      double ymax = 2.0;
+      double dx = (xmax - xmin) / WIDTH;
+      double dy = (ymax - ymin) / HEIGHT;
+      cudaMalloc(&dev_img, WIDTH * HEIGHT * sizeof(uint8_t));
+      dim3 blockDim(16, 16);
+      dim3 gridDim((WIDTH + blockDim.x - 1) / blockDim.x, (HEIGHT + blockDim.y - 1) / blockDim.y);
+      mandelbrotKernel<<<gridDim, blockDim>>>(dev_img, xmin, ymin, xmax, ymax, dx, dy);
+      cudaMemcpy(img, dev_img, WIDTH * HEIGHT * sizeof(uint8_t), cudaMemcpyDeviceToHost);
+      FILE *fp = fopen("mandelbrot.pgm", "wb");
+      fprintf(fp, "P5\n%d %d\n%d\n", WIDTH, HEIGHT, 255);
+      fwrite(img, sizeof(uint8_t), WIDTH * HEIGHT, fp);
+      fclose(fp);
+      free(img);
+      cudaFree(dev_img);
+      return 0;
+  }
+  ```
+- 다음과 같이 컴파일을 진행한다.
+  ```bash
+  nvcc -o name main.cu
+  ```
+- 다음과 같이 프로그램을 실행한다.
+  ```bash
+  ./name
+  ```
+  ![image](https://user-images.githubusercontent.com/66783849/226223357-9952a193-842a-4d86-bbc6-adfc089f6805.png)  
+- mandelbrot.ppm 이미지를 확인한다.
+  ![image](https://user-images.githubusercontent.com/66783849/226223594-060c114d-8379-40c9-a565-c4b658c24d0c.png)  
+  ![image](https://user-images.githubusercontent.com/66783849/226223691-66157937-ef39-4e72-9594-566578b33c29.png)
