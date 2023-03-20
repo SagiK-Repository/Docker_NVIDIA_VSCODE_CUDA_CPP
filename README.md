@@ -82,3 +82,18 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
   
 <br>
   
+
+# 3. DockerHub에 등록
+
+- 이미지에 태그를 추가한다.
+  ```bash
+  docker tag cuda-vscode:latest username/imagename:version
+  ```
+- 다음과 같이 DockerHub에 등록한다.
+  ```bash
+  docker login
+  docker push username/imagename:version
+  ```
+  ![image](https://user-images.githubusercontent.com/66783849/226217999-dca085e4-3fe1-415a-aafc-51ca81cdd23c.png)
+
+<br>
