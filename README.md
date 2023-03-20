@@ -112,7 +112,8 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
   ```bash
   docker start cuda-vscode
   ```
-- exe 형식으로 구성하려면, 다음과 같이 bat를 구성한다.
+- exe 형식으로 구성하려면, 다음과 같이 bat를 구성한다.  
+  ![image](https://user-images.githubusercontent.com/66783849/226222086-cdf2ceab-2cd7-4bd0-bfdd-fc0a33e80f17.png)  
   ```bach
   @echo off
   
