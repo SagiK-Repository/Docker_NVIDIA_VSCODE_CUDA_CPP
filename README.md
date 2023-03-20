@@ -8,11 +8,11 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 
 
 ### 목표
-- [ ] : [1. Dockerfile 구성]
-- [ ] : [2. Dockerfile 빌드]
-- [ ] : [3. DockerHub에 등록]
-- [ ] : [4. Docker 실행]
-- [ ] : [5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set]
+- [x] : [1. Dockerfile 구성]
+- [x] : [2. Dockerfile 빌드]
+- [x] : [3. DockerHub에 등록]
+- [x] : [4. Docker 실행]
+- [x] : [5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set]
 - [ ] : [다른 환경에서 Docker Test]
 
 <br>
@@ -227,3 +227,10 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 - mandelbrot.ppm 이미지를 확인한다.
   ![image](https://user-images.githubusercontent.com/66783849/226223594-060c114d-8379-40c9-a565-c4b658c24d0c.png)  
   ![image](https://user-images.githubusercontent.com/66783849/226223691-66157937-ef39-4e72-9594-566578b33c29.png)
+
+<br>
+
+# 6. 다른 환경에서 Docker Test
+
+- 다른 Window 및 Linux 환경에서 Test를 진행해 보았다.
+  
