@@ -97,3 +97,54 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
   ![image](https://user-images.githubusercontent.com/66783849/226217999-dca085e4-3fe1-415a-aafc-51ca81cdd23c.png)
 
 <br>
+
+
+# 4. Docker 실행
+
+- 다음과 같이 docker를 run 한 후, `localhost:8080`으로 vscode에 접속한다. (password : YOUR_PASSWORD)
+  ```bash
+  docker run -it --gpus all --name cuda-workspace -p 8080:8080 cuda-vscode
+  
+  # 다른 port에 열기를 원하는 경우 다음과 같이 localhost:9090에 접속할 수 있다.
+  docker run -it --gpus all --name cuda-workspace -p 9090:8080 cuda-vscode
+  ```
+- 이미 종료된 container를 다시 여는 경우는 다음과 같이 구성한다.
+  ```bash
+  docker start cuda-vscode
+  ```
+- exe 형식으로 구성하려면, 다음과 같이 bat를 구성한다.
+  ```bach
+  @echo off
+  
+  REM Docker 설치 유무 확인
+  if not exist "%ProgramFiles%\Docker\Docker\resources\bin\docker.exe" (
+      echo Docker가 설치되어 있지 않습니다. Docker를 먼저 설치해주세요.
+      pause
+      exit
+  )
+  
+  REM Docker 이미지 확인 및 다운로드
+  docker inspect cuda-vscode > nul 2>&1 || docker pull nvidia/cuda:11.4.1-devel-ubuntu20.04
+  
+  set CONTAINER_NAME=cuda-workspace
+  set IMAGE_NAME=cuda-vscode
+  
+  REM 실행중인 Docker 컨테이너 검색
+  set EXISTING_CONTAINER=
+  for /f "delims=" %%i in ('docker ps -aq -f "name=%CONTAINER_NAME%"') do set EXISTING_CONTAINER=%%i
+  
+  REM Docker 컨테이너 실행
+  if not "%EXISTING_CONTAINER%"=="" (
+    echo Container already exists. Running existing container %CONTAINER_NAME%...
+    docker start %EXISTING_CONTAINER%
+  ) else (
+    set /p PORT="Enter port number: "
+    echo Creating new container %CONTAINER_NAME%...
+    docker run -it --gpus all --name %CONTAINER_NAME% -p %PORT%:8080 %IMAGE_NAME%
+  )
+  
+  pause
+  ```
+  ![image](https://user-images.githubusercontent.com/66783849/226219809-a5ef9fa4-86e0-479f-a00f-95a5747dd37c.png)  
+  ![image](https://user-images.githubusercontent.com/66783849/226219831-52d1109b-ab7a-4ee7-898d-3186b05c0286.png)
+
