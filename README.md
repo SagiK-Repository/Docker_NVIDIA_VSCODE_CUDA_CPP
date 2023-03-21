@@ -6,6 +6,8 @@
 NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수행할 수 있는 컨테이너를 제작한다.  
 이를 통해 cuda c++을 도커가 존재하는 모든 환경에서 코딩할 수 있도록 구성한다.
 
+![image](https://user-images.githubusercontent.com/66783849/226588071-9716fecf-061e-47f2-9af8-0d8892104552.png)
+
 
 ### 목표
 - [x] : [1. Dockerfile 구성]
