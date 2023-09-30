@@ -1,4 +1,5 @@
 문서정보 : 2023.03.20. 작성, 작성자 [@SAgiKPJH](https://github.com/SAgiKPJH)
+문서 추가 업데이트 : 2023.09.30.
 
 <br>
 
@@ -16,7 +17,8 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 - [x] : [4. Docker 실행]
 - [x] : [5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set]
 - [x] : [6. GPU 연결 확인 및 GPU 사용량 확인]
-- [ ] : [다른 환경에서 Docker Test]
+- [x] : [7. 다른 환경에서 Docker Test]
+- [x] : Git 활용하도록 개선
 
 <br>
 
