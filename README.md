@@ -1,5 +1,5 @@
 문서정보 : 2023.03.20. 작성, 작성자 [@SAgiKPJH](https://github.com/SAgiKPJH)  
-문서 추가 업데이트 : 2023.09.30.
+문서 추가 업데이트 : 2023.09.30. ~ 10.02.
 
 <br>
 
@@ -19,6 +19,9 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 - [x] : [6. GPU 연결 확인 및 GPU 사용량 확인](#6-gpu-연결-확인-및-gpu-사용량-확인)
 - [x] : [7. 다른 환경에서 Docker Test](#7-다른-환경에서-docker-test)
 - [x] : [8. Git 활용하도록 개선](#8-git-활용하도록-개선)
+
+### Error
+- [ ] Docker Error - cuda version Error
 
 <br>
 
@@ -269,9 +272,26 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 
 - [CUDA_GPUPU_PROGRAMMING](https://github.com/SagiK-Repository/CUDA_GPUPU_Programming), [CUDA_CPP_DeepLearning](https://github.com/SagiK-Repository/CUDA_CPP_DeepLearning)을 각각 git으로 받아 활용할 수 있도록 구성합니다.
 - [Docker_Tensorflow_Repository](https://github.com/SagiK-Repository/Docker_Tensorflow_Repository)에서 했던 내용을 참고하여 구성합니다.
-- dockerfile을 다음과 같이 업데이트 합니다.  
+- dockerfile을 다음과 같이 업데이트 합니다.
   ```dockerfile
   # Git clone & Start code-server
-  CMD ["/bin/bash", "git",  "clone",  "https://github.com/SagiK-Repository/CUDA_GPUPU_Programming.git", "/workspace", "&", \
-     "code-server", "--bind-addr", "0.0.0.0:8080", "."]
+  CMD git clone https://github.com/SagiK-Repository/CUDA_CPP_DeepLearning.git /workspace && \
+      code-server --bind-addr 0.0.0.0:8080 .
   ```
+- 그러면 실행과 동시에 git 최신 정보와 함께 작업을 할 수 있습니다.
+
+
+<br>
+
+# Docker Error - cuda version Error
+
+- 다음과 같이 CUDA Version이 안맞아서 생기는 문제가 존재합니다.
+```error
+docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: 
+runc create failed: unable to start container process: error during container init: error running hook #0: error running hook: exit status 1, stdout: , stderr: Auto-detected mode as 'legacy'
+nvidia-container-cli: requirement error: unsatisfied condition: cuda>=12.2, please update your driver to a newer version, or use an earlier cuda container: unknown.
+```
+- 이는 [CUDA WIKI](https://www.wikiwand.com/en/CUDA#/GPUs_supported) 사이트를 통해 자신의 GPU 장치와 CUDA 버전을 자세히 확인합니다.
+- 그리고 [NVIDIA CUD Developer](https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=10) 사이트를 통해 CUDA 버전을 설치합니다. 이때 로그인해서 설치해야 합니다.
+- 마지막으로 설치가 안될 시, Visual Studio Integration, Nsight VSE를 사용자 정의 설치에서 제외해서 설치 진행해야 합니다.
+- 자세한 과정은 [Docker Error](https://github.com/SagiK-Repository/Docker_NVIDIA_VSCODE_CUDA_CPP/issues/1) Issue의 이슈 해결과정을 따라해 보십시오.
