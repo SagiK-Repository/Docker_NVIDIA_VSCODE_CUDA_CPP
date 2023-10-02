@@ -3,6 +3,20 @@
 
 <br>
 
+### Docker GPUPU
+
+```bash
+docker run -it --gpus all --name cuda_gpupu_programming -p 17091:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_gpupu_programming:latest
+```
+
+### Docker DeepLearing
+
+```bash
+docker run -it --gpus all --name cuda_cpp_deeplearning -p 17092:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_cpp_deeplearning:latest
+```
+
+<br>
+
 # Docker_NVIDIA_VSCODE_CUDA_CPP
 NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수행할 수 있는 컨테이너를 제작한다.  
 이를 통해 cuda c++을 도커가 존재하는 모든 환경에서 코딩할 수 있도록 구성한다.
