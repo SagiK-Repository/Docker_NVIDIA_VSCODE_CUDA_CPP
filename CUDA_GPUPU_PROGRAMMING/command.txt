@@ -1,0 +1,17 @@
+# docker build
+docker build -t juhyung1021/nvidia_cuda_cpp_vscode_docker_gpupu_programming .
+
+# docker run
+docker run -it --gpus all --name cuda_gpupu_programming -p 9090:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_gpupu_programming:latest
+
+
+# git Upload
+
+### Stash
+git add .
+
+### Commamt
+git commit -m "Commit message"
+
+### push
+git push origin main

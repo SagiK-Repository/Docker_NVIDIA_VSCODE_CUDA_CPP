@@ -11,14 +11,14 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 
 
 ### 목표
-- [x] : [1. Dockerfile 구성]
-- [x] : [2. Dockerfile 빌드]
-- [x] : [3. DockerHub에 등록]
-- [x] : [4. Docker 실행]
-- [x] : [5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set]
-- [x] : [6. GPU 연결 확인 및 GPU 사용량 확인]
-- [x] : [7. 다른 환경에서 Docker Test]
-- [x] : Git 활용하도록 개선
+- [x] : [1. Dockerfile 구성](#1-dockerfile-구성)
+- [x] : [2. Dockerfile 빌드](#2-dockerfile-빌드)
+- [x] : [3. DockerHub에 등록](#3-dockerhub에-등록)
+- [x] : [4. Docker 실행](#4-docker-실행)
+- [x] : [5. NDIVIA CUDA c++ Docker Test - Mandelbrot Set](#5-ndivia-cuda-c-docker-test---mandelbrot-set)
+- [x] : [6. GPU 연결 확인 및 GPU 사용량 확인](#6-gpu-연결-확인-및-gpu-사용량-확인)
+- [x] : [7. 다른 환경에서 Docker Test](#7-다른-환경에서-docker-test)
+- [x] : [8. Git 활용하도록 개선](#8-git-활용하도록-개선)
 
 <br>
 
@@ -263,3 +263,15 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 
 - 다른 Window 및 Linux 환경에서 Test를 진행해 보았다.
   
+<br>
+
+# 8. Git 활용하도록 개선
+
+- [CUDA_GPUPU_PROGRAMMING](https://github.com/SagiK-Repository/CUDA_GPUPU_Programming), [CUDA_CPP_DeepLearning](https://github.com/SagiK-Repository/CUDA_CPP_DeepLearning)을 각각 git으로 받아 활용할 수 있도록 구성합니다.
+- [Docker_Tensorflow_Repository](https://github.com/SagiK-Repository/Docker_Tensorflow_Repository)에서 했던 내용을 참고하여 구성합니다.
+- dockerfile을 다음과 같이 업데이트 합니다.  
+  ```dockerfile
+  # Git clone & Start code-server
+  CMD ["/bin/bash", "git",  "clone",  "https://github.com/SagiK-Repository/CUDA_GPUPU_Programming.git", "/workspace", "&", \
+     "code-server", "--bind-addr", "0.0.0.0:8080", "."]
+  ```
