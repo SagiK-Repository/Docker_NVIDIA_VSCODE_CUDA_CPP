@@ -21,7 +21,7 @@ NVIDIA CUDA C++ In Docker Container, 도커 환경에서 vscode cuda c++를 수�
 - [x] : [8. Git 활용하도록 개선](#8-git-활용하도록-개선)
 
 ### Error
-- [ ] Docker Error - cuda version Error
+- [x] [Docker Error - cuda version Error](#docker-error---cuda-version-error)
 
 <br>
 
