@@ -6,11 +6,13 @@
 
 ### 바로 사용하기
 ```bash
-docker run -it --gpus all -p 18081:8080 juhyung1021/nvidia_cuda_cpp_vscode_docker_gpupu_programming:12.2.0
+docker run -it --gpus all -p 18081:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_gpupu_programming:12.2.0
+docker run -it --gpus all -p 18081:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_cpp_deeplearning
 
 # or
 
 nvidia-docker run -it -p 18081:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_gpupu_programming:12.2.0
+nvidia-docker run -it -p 18081:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_cpp_deeplearning
 
 # Cuda 버전이 안맞으면, 다른 버전을 활용할 수 있습니다., tag number = cuda version
 ```
