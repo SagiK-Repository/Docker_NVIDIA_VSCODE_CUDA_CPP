@@ -2,7 +2,7 @@
 docker build -t juhyung1021/nvidia_cuda_cpp_vscode_docker_cpp_deeplearning .
 
 # docker run
-docker run -it --gpus all --name cuda_cpp_deeplearning -p 9090:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_cpp_deeplearning:latest
+docker run -it --gpus all --name cuda_cpp_deeplearning -p 18082:8080 -d juhyung1021/nvidia_cuda_cpp_vscode_docker_cpp_deeplearning:latest
 
 
 # git Upload
