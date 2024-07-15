@@ -37,5 +37,5 @@ CMD if [ "$(ls -A /workspace)" ]; then \
         echo "Workspace is not empty, skipping git clone"; \
     else \
         git clone https://github.com/SagiK-Repository/CUDA_CPP_DeepLearning.git /workspace && \
-    fi
+    fi \
     code-server --bind-addr 0.0.0.0:8080 .
