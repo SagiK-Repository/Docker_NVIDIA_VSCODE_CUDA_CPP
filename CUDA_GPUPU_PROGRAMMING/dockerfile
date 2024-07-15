@@ -33,5 +33,9 @@ RUN echo "root:root" | chpasswd && \
 EXPOSE 8080
 
 # Git clone & Start code-server
-CMD git clone https://github.com/SagiK-Repository/CUDA_GPUPU_Programming.git /workspace && \
+CMD if [ "$(ls -A /workspace)" ]; then \
+    echo "Workspace is not empty, skipping git clone"; \
+    else \
+        git clone https://github.com/SagiK-Repository/CUDA_GPUPU_Programming.git /workspace && \
+    fi
     code-server --bind-addr 0.0.0.0:8080 .
